@@ -1,5 +1,5 @@
 #!/bin/bash
-GOPATH=/home/vagrant/go
+GOPATH=$PWD
 export GOPATH
 
 PATH=$PATH:/usr/local/go/bin
