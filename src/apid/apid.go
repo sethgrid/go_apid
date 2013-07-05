@@ -15,7 +15,7 @@ const DEFAULT_CONF = "/etc/default/sendgrid.conf"
 const DEFAULT_SERVER = "127.0.0.1"
 const DEFAULT_PORT = "8082"
 
-var api_server string
+var apiServer string
 var port *string
 
 type ApidError struct {
@@ -80,7 +80,7 @@ func formatRequest(info ApidFunction, passedParams map[string]interface{}) strin
 	}
 	params = params[:len(params)-1]
 
-	return "http://" + api_server + ":" + *port + info.path + params
+	return "http://" + apiServer + ":" + *port + info.path + params
 }
 
 func load(c chan *simplejson.Json) {
@@ -95,11 +95,11 @@ func load(c chan *simplejson.Json) {
 		os.Exit(1)
 	}
 
-	api_server, _ = file.GetString("default", "api_server")
-	fmt.Println(api_server + ":" + *port)
+	apiServer, _ = file.GetString("default", "api_server")
+	fmt.Println(apiServer + ":" + *port)
 
 	// grab apid functions
-	functions_resource := "http://" + api_server + ":" + *port + "/api/functions.json"
+	functions_resource := "http://" + apiServer + ":" + *port + "/api/functions.json"
 	myjson := getSimpleJsonResponse(functions_resource)
 
 	ApidFunctions := myjson.Get("functions")
